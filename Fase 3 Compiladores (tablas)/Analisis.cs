@@ -2055,6 +2055,7 @@ namespace Fase_3_Compiladores__tablas_
         {//valida el <comienzo de una produccion > ->
             try
             {
+                //validar start = ....
                 string resp = "";
                 resp = primer_char();
                 if (resp.CompareTo("<") != 0)
