@@ -2098,7 +2098,14 @@ namespace Fase_3_Compiladores__tablas_
                 }
                 pos++;
                 resp = validador_de_IDS(resp, 2);
-                NoTerminal.Add("<" + resp.ToLower() + ">");
+                if (start == true)
+                {
+                    NoTerminal.Add("<" + "s" + resp.ToLower() + ">");
+                }
+                else
+                {
+                    NoTerminal.Add("<" + resp.ToLower() + ">");
+                }
                 resp = primer_char();
                 if (resp.CompareTo(">") != 0 && resp.CompareTo("=") != 0)
                 {
@@ -2126,6 +2133,7 @@ namespace Fase_3_Compiladores__tablas_
                         pos--;
                         pos--;
                         resp = primer_char();
+                        start = false;
                     }
                     else
                     {
