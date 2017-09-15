@@ -2051,7 +2051,26 @@ namespace Fase_3_Compiladores__tablas_
                 throw;
             }
         }
-        //validar producciones version jorge
+
+
+        string final_del_archivo()
+        {
+            string s = "";
+            string resp = primer_char();
+            try
+            {
+                while (s.ToLower().CompareTo("end.") != 0)
+                {
+                    s += resp;
+                    pos++;
+                }
+                return "";
+            }
+            catch (Exception)
+            {
+                return "Se esperaba final del archivo end " + fil + " columna " + col;
+            }
+        }
         string validar_producciones()
         {//valida el <comienzo de una produccion > ->
             try

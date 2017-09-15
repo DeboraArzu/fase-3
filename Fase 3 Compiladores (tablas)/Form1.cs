@@ -15,6 +15,7 @@ namespace Fase_3_Compiladores__tablas_
     public partial class Form1 : Form
     {
         string texto = "";
+        string mensaje = "";
 
         public Form1()
         {
@@ -37,7 +38,7 @@ namespace Fase_3_Compiladores__tablas_
                 if (window.FileName != "")
                 {
                     string ruta = window.FileName.ToString();
-                    string [] linea = System.IO.File.ReadAllLines(ruta);
+                    string[] linea = System.IO.File.ReadAllLines(ruta);
                     string ln = "";
                     foreach (string line in linea)
                     {
@@ -63,7 +64,6 @@ namespace Fase_3_Compiladores__tablas_
             rchtb_Texto.SelectionBackColor = Color.Black;
             if (this.rchtb_Texto.Text != "")
             {
-                string mensaje = "";
                 Analisis gram = new Analisis(texto); //archivo de entrada
                 mensaje = gram.analizar();
                 if (mensaje != "")
@@ -102,18 +102,18 @@ namespace Fase_3_Compiladores__tablas_
             List<string> da = new List<string>();
             foreach (string part in datos)
             {
-                string [] diviciones = part.Split('‡');
-                TABLA1.Rows [fila].Cells [0].Value = diviciones [0];
-                TABLA1.Rows [fila].Cells [1].Value = diviciones [1];
-                if (diviciones [2].Equals("0"))
+                string[] diviciones = part.Split('‡');
+                TABLA1.Rows[fila].Cells[0].Value = diviciones[0];
+                TABLA1.Rows[fila].Cells[1].Value = diviciones[1];
+                if (diviciones[2].Equals("0"))
                 {
-                    TABLA1.Rows [fila].Cells [2].Value = "";
+                    TABLA1.Rows[fila].Cells[2].Value = "";
                 }
                 else
                 {
-                    TABLA1.Rows [fila].Cells [2].Value = diviciones [2];
+                    TABLA1.Rows[fila].Cells[2].Value = diviciones[2];
                 }
-                TABLA1.Rows [fila].Cells [3].Value = diviciones [3];
+                TABLA1.Rows[fila].Cells[3].Value = diviciones[3];
                 fila++;
             }
         }
@@ -126,11 +126,11 @@ namespace Fase_3_Compiladores__tablas_
             List<string> da = new List<string>();
             foreach (string part in datos)
             {
-                string [] diviciones = part.Split('‡');
-                dtgvNoTerminalTable.Rows [fila].Cells [0].Value = diviciones [0];
-                dtgvNoTerminalTable.Rows [fila].Cells [1].Value = diviciones [1];
-                dtgvNoTerminalTable.Rows [fila].Cells [2].Value = diviciones [2];
-                dtgvNoTerminalTable.Rows [fila].Cells [3].Value = diviciones [3];
+                string[] diviciones = part.Split('‡');
+                dtgvNoTerminalTable.Rows[fila].Cells[0].Value = diviciones[0];
+                dtgvNoTerminalTable.Rows[fila].Cells[1].Value = diviciones[1];
+                dtgvNoTerminalTable.Rows[fila].Cells[2].Value = diviciones[2];
+                dtgvNoTerminalTable.Rows[fila].Cells[3].Value = diviciones[3];
                 fila++;
             }
         }
@@ -142,7 +142,7 @@ namespace Fase_3_Compiladores__tablas_
             {
                 for (int i = 0; i < x.Count; i++)
                 {
-                    aux += (x [i]).ToString() + ",";
+                    aux += (x[i]).ToString() + ",";
                 }
                 aux = aux.Substring(0, aux.Length - 1);
             }
@@ -160,18 +160,18 @@ namespace Fase_3_Compiladores__tablas_
                 {
                     if (ObtenerValores(s) == "0")
                     {
-                        dgvProducciones [0, fila].Value = fila + 1;
-                        dgvProducciones [1, fila].Value = s.Count - 1;
-                        dgvProducciones [2, fila].Value = pr [fila + 1];
-                        dgvProducciones [3, fila].Value = "[" + ObtenerValores(s) + "]";
+                        dgvProducciones[0, fila].Value = fila + 1;
+                        dgvProducciones[1, fila].Value = s.Count - 1;
+                        dgvProducciones[2, fila].Value = pr[fila + 1];
+                        dgvProducciones[3, fila].Value = "[" + ObtenerValores(s) + "]";
 
                     }
                     else
                     {
-                        dgvProducciones [0, fila].Value = fila + 1;
-                        dgvProducciones [1, fila].Value = s.Count;
-                        dgvProducciones [2, fila].Value = pr [fila + 1];
-                        dgvProducciones [3, fila].Value = "[" + ObtenerValores(s) + "]";
+                        dgvProducciones[0, fila].Value = fila + 1;
+                        dgvProducciones[1, fila].Value = s.Count;
+                        dgvProducciones[2, fila].Value = pr[fila + 1];
+                        dgvProducciones[3, fila].Value = "[" + ObtenerValores(s) + "]";
                     }
                     fila++;
                 }
@@ -187,7 +187,7 @@ namespace Fase_3_Compiladores__tablas_
             {
                 for (int j = 0; j < TABLA1.Columns.Count; j++)
                 {
-                    sw.Write("\t" + TABLA1.Rows [i].Cells [j].Value.ToString() + "\t" + "‡");
+                    sw.Write("\t" + TABLA1.Rows[i].Cells[j].Value.ToString() + "\t" + "‡");
                 }
                 sw.WriteLine("\n");
             }
@@ -201,7 +201,7 @@ namespace Fase_3_Compiladores__tablas_
             {
                 for (int j = 0; j < dtgvNoTerminalTable.Columns.Count; j++)
                 {
-                    sw.Write("\t" + dtgvNoTerminalTable.Rows [i].Cells [j].Value.ToString() + "\t" + "‡");
+                    sw.Write("\t" + dtgvNoTerminalTable.Rows[i].Cells[j].Value.ToString() + "\t" + "‡");
                 }
                 sw.WriteLine("\n");
             }
@@ -215,7 +215,7 @@ namespace Fase_3_Compiladores__tablas_
             {
                 for (int j = 0; j < dgvProducciones.Columns.Count; j++)
                 {
-                    sw.Write("\t" + dgvProducciones.Rows [i].Cells [j].Value.ToString() + "\t" + "‡");
+                    sw.Write("\t" + dgvProducciones.Rows[i].Cells[j].Value.ToString() + "\t" + "‡");
                 }
                 sw.WriteLine("\n");
             }
@@ -312,11 +312,37 @@ namespace Fase_3_Compiladores__tablas_
             this.texto = primerstr + segundostr + finalstr;
         }
 
+        private void End()
+        {
+            string pat = @"end\.";
+            // Instantiate the regular expression object.
+            Regex r = new Regex(pat, RegexOptions.IgnoreCase);
+            // Match the regular expression pattern against a text string.
+            Match m = r.Match(texto);
+            if (m.Success)
+            {
+                //pre arreglo  
+                string pattern2 = @"end\.";
+                string replacement2 = "";
+                Regex rgx2 = new Regex(pattern2, RegexOptions.IgnoreCase);
+                string result = rgx2.Replace(this.texto, replacement2);
+                Console.WriteLine(result);
+                this.texto = result;
+            }
+            else
+            {
+                mensaje = this.txtMensaje.Text = "Falta End. al final del archivo";
+                MessageBox.Show("Falta End. al final del archivo", "Error", MessageBoxButtons.OK , MessageBoxIcon.Error);
+                return;
+            }
+        }
+
         private void fix()
         {
             conjuntos(texto);
             convertirtokens();
             convertirsets();
+            End();
         }
     }
 }
