@@ -20,6 +20,7 @@ namespace Fase_3_Compiladores__tablas_
         private const int _9 = 57;
         private const int _ = 95;
         private string epsilon;
+        bool start = false;
         #endregion
         //de uso especifico 
         private int cont_C;
@@ -85,7 +86,7 @@ namespace Fase_3_Compiladores__tablas_
                 fil = col = 1;
                 for (int j = 0; j < pos; j++)
                 {
-                    switch (this.texto [j])
+                    switch (this.texto[j])
                     {
                         case '\r':
                         case '\n':
@@ -120,7 +121,7 @@ namespace Fase_3_Compiladores__tablas_
                 {
 
                     mensaje = this.primer_char();//validacion del nombre del documento+<\s*>+<.>
-                    if (mensaje == "" || !((mensaje [0] >= A && mensaje [0] <= Z) || (mensaje [0] >= a && mensaje [0] <= z) || mensaje [0] == _))
+                    if (mensaje == "" || !((mensaje[0] >= A && mensaje[0] <= Z) || (mensaje[0] >= a && mensaje[0] <= z) || mensaje[0] == _))
                     {
                         this.obtener_filyCol();
                         return "No se definio el nombre del <ARCHIVO COMPILER> (el ID) adecuadamente, se esperaba un ID error en al fila " + fil + " y columna " + col;
@@ -140,7 +141,7 @@ namespace Fase_3_Compiladores__tablas_
                             if (mensaje.CompareTo("units") == 0)//si biene la seccion de units
                             {//si en dado caso biene
                                 mensaje = primer_char();
-                                if (mensaje == "" || !((mensaje [0] >= A && mensaje [0] <= Z) || (mensaje [0] >= a && mensaje [0] <= z) || mensaje [0] == _))
+                                if (mensaje == "" || !((mensaje[0] >= A && mensaje[0] <= Z) || (mensaje[0] >= a && mensaje[0] <= z) || mensaje[0] == _))
                                 {
                                     this.obtener_filyCol();
                                     return "Se esperaba un ID error en al fila " + fil + " y columna " + col;
@@ -266,7 +267,7 @@ namespace Fase_3_Compiladores__tablas_
                         {
                             return mensaje;
                         }
-                        string [] AXU = this.elementos_temps.ToArray();
+                        string[] AXU = this.elementos_temps.ToArray();
                         this.conjuntos.Add(nameconjunto.ToLower(), AXU.ToList<string>());//se guardan los conjuntos con la llave lower para su post comparacion
                         ListaTodos.Add(nameconjunto.ToLower());
 
@@ -313,19 +314,19 @@ namespace Fase_3_Compiladores__tablas_
                         string cadena = "";
                         for (int i = tempinicio; i < pos; i++)
                         {
-                            cadena = cadena + this.texto [i];
+                            cadena = cadena + this.texto[i];
                         }
                         string sucheck = "";
                         if (this.poseeCheck(cadena) == true)
                         {
                             poseecheck = true;
                             sucheck = "check";
-                            Char [] l = cadena.ToCharArray();
+                            Char[] l = cadena.ToCharArray();
                             int i = this.donde_comienzaCheck(cadena);
                             string sbtring = "";
                             for (int j = 0; j < i; j++)
                             {
-                                sbtring = sbtring + l [j];
+                                sbtring = sbtring + l[j];
                             }
                             cadena = sbtring;
                         }
@@ -387,7 +388,7 @@ namespace Fase_3_Compiladores__tablas_
                         string temporal = "";
                         for (int i = ini; i < pos; i++)
                         {
-                            temporal = temporal + texto [i].ToString();
+                            temporal = temporal + texto[i].ToString();
                         }
                         Operators op;
                         string pp = "";
@@ -498,7 +499,7 @@ namespace Fase_3_Compiladores__tablas_
                     ElementoProduccion elpTemp;
                     foreach (string noter in NoTerminal)
                     {
-                        elpTemp = new ElementoProduccion(noter, contenido [k]);
+                        elpTemp = new ElementoProduccion(noter, contenido[k]);
                         Produccion.Add(k + 1, elpTemp);
                         k++;
                     }
@@ -507,14 +508,14 @@ namespace Fase_3_Compiladores__tablas_
 
                     for (int i = ax11; i < pos; i++)
                     {
-                        AUXcadena = AUXcadena + this.texto [i].ToString();
+                        AUXcadena = AUXcadena + this.texto[i].ToString();
                     }
                     if (this.poseeStart_Flecha(AUXcadena) == false)
                     {
                         int fi = 1, co = 1;
                         for (int j = 0; j < ax11; j++)
                         {
-                            switch (this.texto [j])
+                            switch (this.texto[j])
                             {
                                 case '\r':
                                 case '\n':
@@ -544,7 +545,7 @@ namespace Fase_3_Compiladores__tablas_
                     mensaje = primer_char();//estamos en la k
                     pos++;
                     mensaje = this.validador_de_IDS(mensaje, 2);
-                    if (!(this.texto [pos] == ' ' || this.texto [pos] == '\t' || this.texto [pos] == '\n' || this.texto [pos] == '\r'))
+                    if (!(this.texto[pos] == ' ' || this.texto[pos] == '\t' || this.texto[pos] == '\n' || this.texto[pos] == '\r'))
                     {
                         obtener_filyCol();
                         return "Se esperaba un esparico, error en la fila " + fil + " columna " + col;
@@ -628,21 +629,21 @@ namespace Fase_3_Compiladores__tablas_
                 ElementoProduccion ElpTemp;
                 foreach (string noter in NoTerminal)
                 {
-                    ElpTemp = new ElementoProduccion(noter, contenido [g]);
+                    ElpTemp = new ElementoProduccion(noter, contenido[g]);
                     Produccion.Add(g + 1, ElpTemp);
                     g++;
                 }
                 string AUXcadena1 = "";//que es el que contiene todo despues de productions
                 for (int i = ax1; i < pos; i++)
                 {
-                    AUXcadena1 = AUXcadena1 + this.texto [i].ToString();
+                    AUXcadena1 = AUXcadena1 + this.texto[i].ToString();
                 }
                 if (this.poseeStart_Flecha(AUXcadena1) == false)
                 {
                     int fi = 1, co = 1;
                     for (int j = 0; j < ax1; j++)
                     {
-                        switch (this.texto [j])
+                        switch (this.texto[j])
                         {
                             case '\r':
                             case '\n':
@@ -670,7 +671,7 @@ namespace Fase_3_Compiladores__tablas_
             try
             {
                 int value = -1;
-                Regex r = new Regex(@"(\s*)(<)(\s*)(S|s)(T|t)(A|a)(R|r)(T|t)(\s*)(>)(\s*)(-)(>)(\s*)");
+                Regex r = new Regex(@"(\s*)(\s*)(S|s)(T|t)(A|a)(R|r)(T|t)(\s*)(\s*)(=)(\s*)");
                 var v = r.Match(s);
                 value = v.Index;
                 bool b = false;
@@ -802,13 +803,13 @@ namespace Fase_3_Compiladores__tablas_
             string resp = "";
             try
             {
-                while (this.texto.Length > pos && (this.texto [pos] == ' ' || this.texto [pos] == '\n' || this.texto [pos] == '\r' || this.texto [pos] == '\t'))
+                while (this.texto.Length > pos && (this.texto[pos] == ' ' || this.texto[pos] == '\n' || this.texto[pos] == '\r' || this.texto[pos] == '\t'))
                 {//ignorador de espacios
                     pos++;
                 }
-                while (this.texto.Length > pos && this.texto [pos] != ' ' && this.texto [pos] != '\n' && this.texto [pos] != '\r' && this.texto [pos] != '\t')
+                while (this.texto.Length > pos && this.texto[pos] != ' ' && this.texto[pos] != '\n' && this.texto[pos] != '\r' && this.texto[pos] != '\t')
                 {//formador de la plabra
-                    resp += texto [pos].ToString();
+                    resp += texto[pos].ToString();
                     pos++;
                 }
                 return resp;
@@ -824,11 +825,11 @@ namespace Fase_3_Compiladores__tablas_
             string chr = "";
             try
             {
-                while (this.texto.Length > pos && (this.texto [pos] == ' ' || this.texto [pos] == '\n' || this.texto [pos] == '\r' || this.texto [pos] == '\t'))
+                while (this.texto.Length > pos && (this.texto[pos] == ' ' || this.texto[pos] == '\n' || this.texto[pos] == '\r' || this.texto[pos] == '\t'))
                 {//ignorador de espacios
                     pos++;
                 }
-                return this.texto [pos].ToString();
+                return this.texto[pos].ToString();
             }
             catch (Exception)
             {
@@ -845,13 +846,13 @@ namespace Fase_3_Compiladores__tablas_
                 switch (val)
                 {
                     case 0://cuando es un id + (\s*)+(.)
-                        while (pos < texto.Length && ((this.texto [pos] >= A && this.texto [pos] <= Z) || (this.texto [pos] >= a && this.texto [pos] <= z) || (this.texto [pos] >= _0 && this.texto [pos] <= _9) || this.texto [pos] == _))
+                        while (pos < texto.Length && ((this.texto[pos] >= A && this.texto[pos] <= Z) || (this.texto[pos] >= a && this.texto[pos] <= z) || (this.texto[pos] >= _0 && this.texto[pos] <= _9) || this.texto[pos] == _))
                         {//para terminar de reconocer el nombre del doc, para al encontrar algo diferente a un ID
-                            s = s + this.texto [pos];
+                            s = s + this.texto[pos];
                             pos++;
                         }
                         //ignorador de espacios
-                        while (this.texto.Length > pos && (this.texto [pos] == ' ' || this.texto [pos] == '\n' || this.texto [pos] == '\r' || this.texto [pos] == '\t'))
+                        while (this.texto.Length > pos && (this.texto[pos] == ' ' || this.texto[pos] == '\n' || this.texto[pos] == '\r' || this.texto[pos] == '\t'))
                         {//ignorador de espacios
                             pos++;
                         }
@@ -865,9 +866,9 @@ namespace Fase_3_Compiladores__tablas_
                             this.palabras_definidas.Add(s.ToLower());
                         return "";
                     case 1:
-                        while (pos < texto.Length && ((this.texto [pos] >= A && this.texto [pos] <= Z) || (this.texto [pos] >= a && this.texto [pos] <= z) || (this.texto [pos] >= _0 && this.texto [pos] <= _9) || this.texto [pos] == _))
+                        while (pos < texto.Length && ((this.texto[pos] >= A && this.texto[pos] <= Z) || (this.texto[pos] >= a && this.texto[pos] <= z) || (this.texto[pos] >= _0 && this.texto[pos] <= _9) || this.texto[pos] == _))
                         {//para terminar de reconocer el id, para al encontrar algo diferente a un ID
-                            s = s + this.texto [pos];
+                            s = s + this.texto[pos];
                             pos++;
                         }
                         string temp = s.ToLower();
@@ -888,7 +889,7 @@ namespace Fase_3_Compiladores__tablas_
                         }
                         this.includs.Add(temp.ToLower());
                         //pos++;
-                        while (this.texto.Length > pos && (this.texto [pos] == ' ' || this.texto [pos] == '\n' || this.texto [pos] == '\r' || this.texto [pos] == '\t'))
+                        while (this.texto.Length > pos && (this.texto[pos] == ' ' || this.texto[pos] == '\n' || this.texto[pos] == '\r' || this.texto[pos] == '\t'))
                         {//ignorador de espacios
                             pos++;
                         }
@@ -901,7 +902,7 @@ namespace Fase_3_Compiladores__tablas_
                         {
                             pos++;
                             temp = primer_char();
-                            if (!((temp [0] >= a && temp [0] <= z) || (temp [0] >= A && temp [0] <= Z) || temp [0] == _) || pos >= texto.Length || temp.CompareTo("") == 0)
+                            if (!((temp[0] >= a && temp[0] <= z) || (temp[0] >= A && temp[0] <= Z) || temp[0] == _) || pos >= texto.Length || temp.CompareTo("") == 0)
                             {
                                 obtener_filyCol();
                                 return "Se esperaba un id para la seccion de units, error en la fila " + fil + " y columna " + col;
@@ -913,23 +914,23 @@ namespace Fase_3_Compiladores__tablas_
                             obtener_filyCol();
                         return "Se esperaba un . o una , para la seccion de units, error en la fila " + fil + " y columna " + col;
                     case 2://hay que retornar solo el id
-                        while (pos < texto.Length && ((this.texto [pos] >= A && this.texto [pos] <= Z) || (this.texto [pos] >= a && this.texto [pos] <= z) || (this.texto [pos] >= _0 && this.texto [pos] <= _9) || this.texto [pos] == _))
+                        while (pos < texto.Length && ((this.texto[pos] >= A && this.texto[pos] <= Z) || (this.texto[pos] >= a && this.texto[pos] <= z) || (this.texto[pos] >= _0 && this.texto[pos] <= _9) || this.texto[pos] == _))
                         {//para terminar de reconocer un ID
-                            s = s + this.texto [pos];
+                            s = s + this.texto[pos];
                             pos++;
                         }
                         return s;
                     case 3://hay que retornar todo el operador para ', para el manejo de los operadores
-                        while (pos < texto.Length && !(this.texto [pos] == ' ' || this.texto [pos] == '\n' || this.texto [pos] == '\t' || this.texto [pos] == '\r') && this.texto [pos].ToString().CompareTo("'") != 0)
+                        while (pos < texto.Length && !(this.texto[pos] == ' ' || this.texto[pos] == '\n' || this.texto[pos] == '\t' || this.texto[pos] == '\r') && this.texto[pos].ToString().CompareTo("'") != 0)
                         {//para terminar de reconocer el operador
-                            s = s + this.texto [pos];
+                            s = s + this.texto[pos];
                             pos++;
                         }
                         return s;
                     case 4://hay que retornar todo el operador para "
-                        while (pos < texto.Length && !(this.texto [pos] == ' ' || this.texto [pos] == '\n' || this.texto [pos] == '\t' || this.texto [pos] == '\r') && this.texto [pos].ToString().CompareTo("\"") != 0)
+                        while (pos < texto.Length && !(this.texto[pos] == ' ' || this.texto[pos] == '\n' || this.texto[pos] == '\t' || this.texto[pos] == '\r') && this.texto[pos].ToString().CompareTo("\"") != 0)
                         {//para terminar de reconocer el operador
-                            s = s + this.texto [pos];
+                            s = s + this.texto[pos];
                             pos++;
                         }
                         return s;
@@ -956,23 +957,23 @@ namespace Fase_3_Compiladores__tablas_
             {
                 int x = pos;//se inicializa el auxiliar de la posicion
                 string s = "";
-                while (this.texto.Length > x && (this.texto [x] == ' ' || this.texto [x] == '\n' || this.texto [x] == '\t' || this.texto [x] == '\r'))
+                while (this.texto.Length > x && (this.texto[x] == ' ' || this.texto[x] == '\n' || this.texto[x] == '\t' || this.texto[x] == '\r'))
                 {
                     x++;
                 }
                 if (this.texto.Length > x)
                 {
-                    s = this.texto [x].ToString();
+                    s = this.texto[x].ToString();
                 }
                 else
                     return 0;//indica fin del archivo
 
-                if ((this.texto [x] >= a && this.texto [x] <= z) || (this.texto [x] >= A && this.texto [x] <= Z))
+                if ((this.texto[x] >= a && this.texto[x] <= z) || (this.texto[x] >= A && this.texto[x] <= Z))
                 {//pareciera venir un id
                     x++;
-                    while (this.texto.Length > x && ((this.texto [x] >= a && this.texto [x] <= z) || (this.texto [x] >= A && this.texto [x] <= Z) || (this.texto [x] >= _0 && this.texto [x] <= _9) || this.texto [x] == _))
+                    while (this.texto.Length > x && ((this.texto[x] >= a && this.texto[x] <= z) || (this.texto[x] >= A && this.texto[x] <= Z) || (this.texto[x] >= _0 && this.texto[x] <= _9) || this.texto[x] == _))
                     {
-                        s = s + this.texto [x].ToString();
+                        s = s + this.texto[x].ToString();
                         x++;
                     }//otros ca
                     if (s.ToLower().CompareTo("keywords") == 0)
@@ -997,7 +998,7 @@ namespace Fase_3_Compiladores__tablas_
                             return 2;//lefth
                     }
                     //encontremos el = o el (
-                    while (this.texto.Length > x && (this.texto [x] == ' ' || this.texto [x] == '\n' || this.texto [x] == '\r' || this.texto [x] == '\t'))
+                    while (this.texto.Length > x && (this.texto[x] == ' ' || this.texto[x] == '\n' || this.texto[x] == '\r' || this.texto[x] == '\t'))
                     {//ignorador de espacios
                         x++;
                     }
@@ -1005,11 +1006,11 @@ namespace Fase_3_Compiladores__tablas_
                     {
                         return 3;//solo biene el id
                     }
-                    if (this.texto [x].ToString().CompareTo("(") == 0)
+                    if (this.texto[x].ToString().CompareTo("(") == 0)
                     {
                         return 4;//id + ( 
                     }
-                    if (this.texto [x].ToString().CompareTo("=") == 0)
+                    if (this.texto[x].ToString().CompareTo("=") == 0)
                     {
                         return 5;//id + = 
                     }
@@ -1090,7 +1091,7 @@ namespace Fase_3_Compiladores__tablas_
                     obtener_filyCol();
                     return "Se esperaba un CHAR, error en la definision del ELEMENTO del conjunto, error en la fila " + fil + " columna " + col;
                 }
-                string s = this.texto [pos].ToString();
+                string s = this.texto[pos].ToString();
                 if ((b == true && s.CompareTo("\"") == 0))
                 {
                     obtener_filyCol();
@@ -1101,12 +1102,12 @@ namespace Fase_3_Compiladores__tablas_
                     obtener_filyCol();
                     return "Se esperaba un CHAR diferente a ', error en la definision del ELEMENTO del conjunto, error en la fila " + fil + " columna " + col;
                 }
-                else if ((s [0] == ' ' || s [0] == '\n' || s [0] == '\t' || s [0] == '\r') && b == true)
+                else if ((s[0] == ' ' || s[0] == '\n' || s[0] == '\t' || s[0] == '\r') && b == true)
                 {
                     obtener_filyCol();
                     return "Se esperaba un CHAR seguido del \" no un TIPO DE ESPACIO, error en la definision del ELEMENTO del conjunto, error en la fila " + fil + " columna " + col;
                 }
-                else if ((s [0] == ' ' || s [0] == '\n' || s [0] == '\t' || s [0] == '\r') && b == false)
+                else if ((s[0] == ' ' || s[0] == '\n' || s[0] == '\t' || s[0] == '\r') && b == false)
                 {
                     obtener_filyCol();
                     return "Se esperaba un CHAR seguido del ' no un TIPO DE ESPACIO, error en la definision del ELEMENTO del conjunto, error en la fila " + fil + " columna " + col;
@@ -1115,13 +1116,13 @@ namespace Fase_3_Compiladores__tablas_
                 {
                     string char1 = s;//contiene el elemento
                     pos++;
-                    string ch = this.texto [pos].ToString();//aqui se valida que termine <char><'|">
-                    if ((ch == "" && b == true) || (ch.CompareTo("'") == 0 && b == true) || ((ch [0] == ' ' || ch [0] == '\n' || ch [0] == '\t' || ch [0] == '\r') && b == true))
+                    string ch = this.texto[pos].ToString();//aqui se valida que termine <char><'|">
+                    if ((ch == "" && b == true) || (ch.CompareTo("'") == 0 && b == true) || ((ch[0] == ' ' || ch[0] == '\n' || ch[0] == '\t' || ch[0] == '\r') && b == true))
                     {
                         obtener_filyCol();
                         return "Se esperaba un \", error en la definision del ELEMENTO del conjunto, error en la fila " + fil + " columna " + col;
                     }
-                    else if ((ch == "" && b == false) || (ch.CompareTo("\"") == 0 && b == false) || ((ch [0] == ' ' || ch [0] == '\n' || ch [0] == '\t' || ch [0] == '\r') && b == false))
+                    else if ((ch == "" && b == false) || (ch.CompareTo("\"") == 0 && b == false) || ((ch[0] == ' ' || ch[0] == '\n' || ch[0] == '\t' || ch[0] == '\r') && b == false))
                     {
                         obtener_filyCol();
                         return "Se esperaba un ', error en la definision del ELEMENTO del conjunto, error en la fila " + fil + " columna " + col;
@@ -1132,15 +1133,15 @@ namespace Fase_3_Compiladores__tablas_
                     {
                         TEMPORAL = 1;
                         char separador = Convert.ToChar(300);//tiene que ser un valor que no este en el rango de los conjuntos
-                        string [] ar = this.elementos_temps.ToArray();
-                        string [] araux = ar [this.elementos_temps.Count - 1].Split(separador);
-                        int i = araux [araux.Length - 1] [0];
-                        int j = char1 [0];
-                        string x = ar [this.elementos_temps.Count - 1] + separador + char1;
+                        string[] ar = this.elementos_temps.ToArray();
+                        string[] araux = ar[this.elementos_temps.Count - 1].Split(separador);
+                        int i = araux[araux.Length - 1][0];
+                        int j = char1[0];
+                        string x = ar[this.elementos_temps.Count - 1] + separador + char1;
                         if (i < j)
                         {
                             validarRango = false;
-                            ar [this.elementos_temps.Count - 1] = x;
+                            ar[this.elementos_temps.Count - 1] = x;
                             this.elementos_temps.Clear();
                             this.elementos_temps = ar.ToList<string>();
                         }
@@ -1211,7 +1212,7 @@ namespace Fase_3_Compiladores__tablas_
                 string s = "";
                 try
                 {// s = c + h + r
-                    s = this.texto [pos].ToString() + this.texto [pos + 1].ToString() + this.texto [pos + 2].ToString();
+                    s = this.texto[pos].ToString() + this.texto[pos + 1].ToString() + this.texto[pos + 2].ToString();
                 }
                 catch (Exception)
                 {
@@ -1255,9 +1256,9 @@ namespace Fase_3_Compiladores__tablas_
                     return "Se esperaba un NUMERO error en la fila " + fil + " columna " + col; ;
                 }
                 string v = "";
-                while ((this.texto [pos] >= _0 && this.texto [pos] <= _9) && (this.texto.Length > pos))
+                while ((this.texto[pos] >= _0 && this.texto[pos] <= _9) && (this.texto.Length > pos))
                 {
-                    v = v + this.texto [pos].ToString();
+                    v = v + this.texto[pos].ToString();
                     pos++;
                 }//apartir de aqui esta en la pos que es diferente al numero
                 if (v == "")
@@ -1265,7 +1266,7 @@ namespace Fase_3_Compiladores__tablas_
                     obtener_filyCol();
                     return "Se esperaba NUMERO, error en la fila " + fil + " columna " + col;
                 }
-                if ((this.texto.Length > pos) && this.texto [pos].ToString().CompareTo(")") == 0)
+                if ((this.texto.Length > pos) && this.texto[pos].ToString().CompareTo(")") == 0)
                 {//se esta en la pos del ) que cierra el chr(numero)
                     int TEMPORAL = 0;
                     #region validar rango
@@ -1273,16 +1274,16 @@ namespace Fase_3_Compiladores__tablas_
                     {
                         TEMPORAL = 1;
                         char separador = Convert.ToChar(300);
-                        string [] ar = this.elementos_temps.ToArray();
-                        string [] araux = ar [this.elementos_temps.Count - 1].Split(separador);
-                        int i = araux [araux.Length - 1] [0];
+                        string[] ar = this.elementos_temps.ToArray();
+                        string[] araux = ar[this.elementos_temps.Count - 1].Split(separador);
+                        int i = araux[araux.Length - 1][0];
                         int j = Convert.ToInt32(v);
                         char X = Convert.ToChar(j);
-                        string x = ar [this.elementos_temps.Count - 1] + separador + X.ToString();
+                        string x = ar[this.elementos_temps.Count - 1] + separador + X.ToString();
                         if (i < j)
                         {
                             validarRango = false;
-                            ar [this.elementos_temps.Count - 1] = x;
+                            ar[this.elementos_temps.Count - 1] = x;
                             this.elementos_temps.Clear();
                             this.elementos_temps = ar.ToList<string>();
                         }
@@ -1394,7 +1395,7 @@ namespace Fase_3_Compiladores__tablas_
                     pos++;
                     return this.validar_tokens(true, nameTok);
                 }
-                else if ((s [0] >= a && s [0] <= z) || (s [0] >= A && s [0] <= Z))
+                else if ((s[0] >= a && s[0] <= z) || (s[0] >= A && s[0] <= Z))
                 {//si lo que encontro parece ser un ID 
                     pos++;
                     s = this.validador_de_IDS(s, 2);
@@ -1529,7 +1530,7 @@ namespace Fase_3_Compiladores__tablas_
                 string s = "";
                 try
                 {
-                    s = this.texto [pos].ToString();
+                    s = this.texto[pos].ToString();
                 }
                 catch (Exception)
                 {
@@ -1537,7 +1538,7 @@ namespace Fase_3_Compiladores__tablas_
                     throw;
                 }
 
-                if ((s == "" || s [0] == '\n' || s [0] == ' ' || s [0] == '\r' || s [0] == '\t'))
+                if ((s == "" || s[0] == '\n' || s[0] == ' ' || s[0] == '\r' || s[0] == '\t'))
                 {
                     obtener_filyCol();
                     return "Se esperaba char, error al definir el token en la fila " + fil + " columna " + col;
@@ -1558,7 +1559,7 @@ namespace Fase_3_Compiladores__tablas_
                     pos++;//cambiamos a lo que cierra el char
                     if (this.texto.Length > pos)
                     {
-                        s = this.texto [pos].ToString();
+                        s = this.texto[pos].ToString();
 
                         if (s.CompareTo("'") == 0 && b == false)
                         {
@@ -1621,7 +1622,7 @@ namespace Fase_3_Compiladores__tablas_
                                 //this.elementos_temps.Add(val);
                                 return this.validar_tokens(false, nameTok);
                             }
-                            else if ((s [0] >= a && s [0] <= z) || (s [0] >= A && s [0] <= Z))
+                            else if ((s[0] >= a && s[0] <= z) || (s[0] >= A && s[0] <= Z))
                             {
                                 //this.elementos_temps.Add(val);
                                 return this.validar_tokens(false, nameTok);
@@ -1685,7 +1686,7 @@ namespace Fase_3_Compiladores__tablas_
         {//true " false '
             try
             {
-                string s = this.texto [pos].ToString();
+                string s = this.texto[pos].ToString();
                 string aso = "";
                 if (s.CompareTo("\"") == 0)
                 {
@@ -1697,7 +1698,7 @@ namespace Fase_3_Compiladores__tablas_
                     obtener_filyCol();
                     return "Elemento invalido para poderador, no puede utilizar el ', error en la fila " + fil + " columna " + col;
                 }
-                else if (s [0] == ' ' || s [0] == '\n' || s [0] == '\t' || s [0] == '\r')
+                else if (s[0] == ' ' || s[0] == '\n' || s[0] == '\t' || s[0] == '\r')
                 {
                     obtener_filyCol();
                     return "Los espacios son invalidos para ser un poderador, no los puede utilizar, error en la fila " + fil + " columna " + col;
@@ -1753,7 +1754,7 @@ namespace Fase_3_Compiladores__tablas_
                     }
                     this.elementos_temps.Add(s);
                 }
-                s = this.texto [pos].ToString();//posible llave que cierra, true " false '
+                s = this.texto[pos].ToString();//posible llave que cierra, true " false '
                 if (s.CompareTo("\"") == 0 && b == false)
                 {
                     obtener_filyCol();
@@ -1764,7 +1765,7 @@ namespace Fase_3_Compiladores__tablas_
                     obtener_filyCol();
                     return "Se esperaba el \", error en la fila " + fil + " columna " + col;
                 }
-                else if (s [0] == ' ' || s [0] == '\n' || s [0] == '\t' || s [0] == '\r')
+                else if (s[0] == ' ' || s[0] == '\n' || s[0] == '\t' || s[0] == '\r')
                 {
                     obtener_filyCol();
                     return "Los espacios son invalidos para ser un poderador, no los puede utilizar, error en la fila " + fil + " columna " + col;
@@ -1795,7 +1796,7 @@ namespace Fase_3_Compiladores__tablas_
                         return "Se esperaba definicion de un 'OPERADOR', error en la fila " + fil + " columna " + col;
                     }
                 }
-                else if ((s [0] >= a && s [0] <= z) || (s [0] >= A && s [0] <= Z))
+                else if ((s[0] >= a && s[0] <= z) || (s[0] >= A && s[0] <= Z))
                 {
                     pos++;
                     s = this.validador_de_IDS(s, 2);
@@ -1836,15 +1837,15 @@ namespace Fase_3_Compiladores__tablas_
         {
             try
             {
-                if ((this.texto [pos] >= a && this.texto [pos] <= z) || (this.texto [pos] >= A && this.texto [pos] <= Z))
+                if ((this.texto[pos] >= a && this.texto[pos] <= z) || (this.texto[pos] >= A && this.texto[pos] <= Z))
                 {
-                    string s = this.texto [pos].ToString();
+                    string s = this.texto[pos].ToString();
                     pos++;
                     s = this.validador_de_IDS(s, 2);
                     if (!this.elementos_temps.Contains(s.ToLower()))
                     {
                         this.elementos_temps.Add(s.ToLower());
-                        if (this.texto [pos].ToString().CompareTo("'") == 0 && b == false)
+                        if (this.texto[pos].ToString().CompareTo("'") == 0 && b == false)
                         {
                             pos++;
                             s = primer_char();
@@ -1878,7 +1879,7 @@ namespace Fase_3_Compiladores__tablas_
                                 return "caracter invalido error en la fila " + fil + " columna " + col;
                             }
                         }
-                        else if (this.texto [pos].ToString().CompareTo("\"") == 0 && b == true)
+                        else if (this.texto[pos].ToString().CompareTo("\"") == 0 && b == true)
                         {
                             pos++;
                             s = primer_char();
@@ -2057,15 +2058,21 @@ namespace Fase_3_Compiladores__tablas_
             {
                 //validar start = ....
                 string resp = "";
+                start = false;
                 resp = primer_char();
-                if (resp.CompareTo("<") != 0)
+                if (resp.CompareTo("<") != 0 && resp.ToLower().CompareTo("s") != 0)
                 {
                     obtener_filyCol();
                     return "Se esperaba < error en la fila " + fil + " columna " + col;
                 }
+                //START
+                if (resp.ToLower().CompareTo("s") == 0)
+                {
+                    start = true;
+                }
                 pos++;
                 resp = primer_char();
-                if (!((resp [0] >= A && resp [0] <= Z) || (resp [0] >= a && resp [0] <= z)))
+                if (!((resp[0] >= A && resp[0] <= Z) || (resp[0] >= a && resp[0] <= z)))
                 {
                     obtener_filyCol();
                     return "Se esperaba un ID, error fila " + fil + " columna " + col;
@@ -2074,7 +2081,7 @@ namespace Fase_3_Compiladores__tablas_
                 resp = validador_de_IDS(resp, 2);
                 NoTerminal.Add("<" + resp.ToLower() + ">");
                 resp = primer_char();
-                if (resp.CompareTo(">") != 0)
+                if (resp.CompareTo(">") != 0 && resp.CompareTo("=") != 0)
                 {
                     obtener_filyCol();
                     return "Se esperaba > error en la fila " + fil + " columna " + col;
@@ -2084,7 +2091,7 @@ namespace Fase_3_Compiladores__tablas_
                 pos++;
                 try
                 {
-                    resp = resp + this.texto [pos];
+                    resp = resp + this.texto[pos];
                 }
                 catch (Exception)
                 {
@@ -2093,10 +2100,18 @@ namespace Fase_3_Compiladores__tablas_
                 }
                 if (resp.CompareTo("->") != 0)
                 {
-
                     pos--;
                     obtener_filyCol();
-                    return "Se esperaba -> error en la fila " + fil + " columna " + col;
+                    if (start == true)
+                    {
+                        pos--;
+                        pos--;
+                        resp = primer_char();
+                    }
+                    else
+                    {
+                        return "Se esperaba -> error en la fila " + fil + " columna " + col;
+                    }
                 }
                 pos++;
                 Terminales.Add(new List<string>());
@@ -2110,7 +2125,7 @@ namespace Fase_3_Compiladores__tablas_
                 }
                 pos++;
                 resp = primer_char();
-                if (resp.CompareTo("<") == 0)
+                if (resp.CompareTo("<") == 0 || resp.ToLower().CompareTo("s") == 0)
                 {
                     return this.validar_producciones();
                 }
@@ -2132,9 +2147,9 @@ namespace Fase_3_Compiladores__tablas_
             string resp = primer_char();
             //validar que no sea epsilon, si es ignorar
             #region Validar Epsilon
-            if (resp [0].ToString().CompareTo(epsilon) == 0)
+            if (resp[0].ToString().CompareTo(epsilon) == 0)
             {
-                Terminales [mas].Add(epsilon);
+                Terminales[mas].Add(epsilon);
                 pos++;
                 return validar_contenido_produccion(true);
             }
@@ -2167,32 +2182,32 @@ namespace Fase_3_Compiladores__tablas_
             else if (resp.CompareTo("'") == 0)
             {
                 pos++;
-                if (this.texto [pos] == '\n' || this.texto [pos] == '\t' || this.texto [pos] == '\r' || this.texto [pos] == ' ')
+                if (this.texto[pos] == '\n' || this.texto[pos] == '\t' || this.texto[pos] == '\r' || this.texto[pos] == ' ')
                 {
                     obtener_filyCol();
                     return "Se esperaba un elemeto, no un espacio, error fila " + fil + " columan " + col;
                 }
-                else if (this.texto [pos].ToString().CompareTo("'") == 0)
+                else if (this.texto[pos].ToString().CompareTo("'") == 0)
                 {
                     obtener_filyCol();
                     return "Se esperaba un elemento distinto de ' error fila " + fil + " columan " + col;
                 }
-                resp = this.texto [pos].ToString();
+                resp = this.texto[pos].ToString();
                 pos++;
                 resp = validador_de_IDS(resp, 3);
-                if (this.texto [pos].ToString().CompareTo("'") != 0)
+                if (this.texto[pos].ToString().CompareTo("'") != 0)
                 {
                     obtener_filyCol();
                     return "Se esperaba un ' error fila " + fil + " columan " + col;
                 }
-                Terminales [mas].Add(resp.ToLower());
+                Terminales[mas].Add(resp.ToLower());
                 if (!ListaTodos.Contains(resp.ToLower()))
                 {
-                    string [] llavesitas = TokensMostrar.Keys.ToArray();
+                    string[] llavesitas = TokensMostrar.Keys.ToArray();
                     int nuevaLlave = -1;
                     foreach (string k in llavesitas)
                     {
-                        DatosTabla1 iterador = TokensMostrar [k];
+                        DatosTabla1 iterador = TokensMostrar[k];
                         if (nuevaLlave < iterador.numtoken)
                         {
                             nuevaLlave = iterador.numtoken;
@@ -2217,32 +2232,32 @@ namespace Fase_3_Compiladores__tablas_
             else if (resp.CompareTo("\"") == 0)
             {
                 pos++;
-                if (this.texto [pos] == '\n' || this.texto [pos] == '\t' || this.texto [pos] == '\r' || this.texto [pos] == ' ')
+                if (this.texto[pos] == '\n' || this.texto[pos] == '\t' || this.texto[pos] == '\r' || this.texto[pos] == ' ')
                 {
                     obtener_filyCol();
                     return "Se esperaba un elemeto, no un espacio, error fila " + fil + " columan " + col;
                 }
-                else if (this.texto [pos].ToString().CompareTo("\"") == 0)
+                else if (this.texto[pos].ToString().CompareTo("\"") == 0)
                 {
                     obtener_filyCol();
                     return "Se esperaba un elemento distinto de \" error fila " + fil + " columan " + col;
                 }
-                resp = this.texto [pos].ToString();
+                resp = this.texto[pos].ToString();
                 pos++;
                 resp = validador_de_IDS(resp, 4);//todo menos "
-                if (this.texto [pos].ToString().CompareTo("\"") != 0)
+                if (this.texto[pos].ToString().CompareTo("\"") != 0)
                 {
                     obtener_filyCol();
                     return "Se esperaba un \" error fila " + fil + " columan " + col;
                 }
-                Terminales [mas].Add(resp.ToLower());
+                Terminales[mas].Add(resp.ToLower());
                 if (!ListaTodos.Contains(resp.ToLower()))
                 {
-                    string [] llavesitas = TokensMostrar.Keys.ToArray();
+                    string[] llavesitas = TokensMostrar.Keys.ToArray();
                     int nuevaLlave = -1;
                     foreach (string k in llavesitas)
                     {
-                        DatosTabla1 iterador = TokensMostrar [k];
+                        DatosTabla1 iterador = TokensMostrar[k];
                         if (nuevaLlave < iterador.numtoken)
                         {
                             nuevaLlave = iterador.numtoken;
@@ -2268,14 +2283,14 @@ namespace Fase_3_Compiladores__tablas_
             {
                 pos++;
                 resp = primer_char();
-                if (!((resp [0] >= A && resp [0] <= Z) || (resp [0] >= a && resp [0] <= z)))
+                if (!((resp[0] >= A && resp[0] <= Z) || (resp[0] >= a && resp[0] <= z)))
                 {
                     obtener_filyCol();
                     return "Se esperaba un ID, error fila " + fil + " columna " + col;
                 }
                 pos++;
                 resp = validador_de_IDS(resp, 2);
-                Terminales [mas].Add("<" + resp.ToLower() + ">");
+                Terminales[mas].Add("<" + resp.ToLower() + ">");
                 resp = primer_char();
                 if (resp.CompareTo(">") != 0)
                 {
@@ -2292,17 +2307,17 @@ namespace Fase_3_Compiladores__tablas_
             }
             #endregion
             #region Validar ids
-            else if ((resp [0] >= A && resp [0] <= Z) || (resp [0] >= a && resp [0] <= z))
+            else if ((resp[0] >= A && resp[0] <= Z) || (resp[0] >= a && resp[0] <= z))
             {
                 pos++;
                 resp = validador_de_IDS(resp, 2);
                 if (!ListaTodos.Contains(resp.ToLower()))
                 {
-                    string [] llavesitas = TokensMostrar.Keys.ToArray();
+                    string[] llavesitas = TokensMostrar.Keys.ToArray();
                     int nuevaLlave = -1;
                     foreach (string k in llavesitas)
                     {
-                        DatosTabla1 iterador = TokensMostrar [k];
+                        DatosTabla1 iterador = TokensMostrar[k];
                         if (nuevaLlave < iterador.numtoken)
                         {
                             nuevaLlave = iterador.numtoken;
@@ -2314,7 +2329,7 @@ namespace Fase_3_Compiladores__tablas_
                     Simbolos.Add(resp.ToLower(), t);
                     ListaTodos.Add(resp.ToLower());
                 }
-                Terminales [mas].Add(resp.ToLower());
+                Terminales[mas].Add(resp.ToLower());
                 return this.validar_contenido_produccion(true);
             }
             #endregion
@@ -2323,14 +2338,14 @@ namespace Fase_3_Compiladores__tablas_
             {
                 pos++;
                 resp = primer_char();
-                if (!((resp [0] >= A && resp [0] <= Z) || (resp [0] >= a && resp [0] <= z)))
+                if (!((resp[0] >= A && resp[0] <= Z) || (resp[0] >= a && resp[0] <= z)))
                 {
                     obtener_filyCol();
                     return "Se esperaba un id, error fila " + fil + " columna " + col;
                 }
                 pos++;
                 resp = validador_de_IDS(resp, 2);
-                Terminales [mas].Add("{" + resp.ToLower() + "}");
+                Terminales[mas].Add("{" + resp.ToLower() + "}");
                 resp = primer_char();
                 if (resp.CompareTo("}") != 0)
                 {
@@ -2400,9 +2415,9 @@ namespace Fase_3_Compiladores__tablas_
             List<string> prueba = new List<string>();
             foreach (string key in TokensMostrar.Keys)
             {
-                int num = TokensMostrar [key].numtoken;
-                int pre = TokensMostrar [key].precedencia;
-                string aso = TokensMostrar [key].Asociatividad;
+                int num = TokensMostrar[key].numtoken;
+                int pre = TokensMostrar[key].precedencia;
+                string aso = TokensMostrar[key].Asociatividad;
                 prueba.Add(num + "‡" + key + "‡" + pre + "‡" + aso);
             }
             return prueba;
@@ -2413,7 +2428,7 @@ namespace Fase_3_Compiladores__tablas_
             List<string> prueba = new List<string>();
             foreach (string key in Keywordss.Keys)
             {
-                int num = Keywordss [key];
+                int num = Keywordss[key];
                 prueba.Add(num + "‡" + key);
             }
             return prueba;
