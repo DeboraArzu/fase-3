@@ -61,6 +61,7 @@ namespace Fase_3_Compiladores__tablas_
             Terminales = new List<List<string>>();
             this.palabras_definidas.Add("units");
             this.palabras_definidas.Add("tokens");
+            this.palabras_definidas.Add("sets");
             this.palabras_definidas.Add("left");
             this.palabras_definidas.Add("keywords");
             this.palabras_definidas.Add("right");
@@ -423,6 +424,7 @@ namespace Fase_3_Compiladores__tablas_
                         }
                         this.elementos_temps.Clear();
                         precedens++;
+                        vinoTokens = true;
                         #endregion
                     }
                     else if (prediccion == 8 && vinoTokens == true)//cambiamos de seccion en el archivo
@@ -2389,7 +2391,7 @@ namespace Fase_3_Compiladores__tablas_
             }
             else
                 obtener_filyCol();
-            return "Caracter invalido, error en la fila " + fil + " columna " + col;
+            return "Caracter invalido, error en la fila " + fil + " columna " + col + " Verifique que el simbolo de epsilon sea este:  ԑ";
             #endregion
         }
 

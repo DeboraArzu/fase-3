@@ -225,35 +225,42 @@ namespace Fase_3_Compiladores__tablas_
 
         private void convertirtokens()
         {
-            string pattern = @"tokens";
-            string replacement = "";
-            Regex rgx = new Regex(pattern);
-            string result = rgx.Replace(texto, replacement);
+            if (esets)
+            {
+                string pattern = @"tokens";
+                string replacement = "";
+                Regex rgx = new Regex(pattern);
+                string result = rgx.Replace(texto, replacement);
 
-            Console.WriteLine("Original String: {0}", texto);
-            Console.WriteLine("Replacement String: {0}", result);
-            this.texto = "";
-            this.texto = result;
-            Console.WriteLine("Tokens eliminados: {0}", this.texto);
+                Console.WriteLine("Original String: {0}", texto);
+                Console.WriteLine("Replacement String: {0}", result);
+                this.texto = "";
+                this.texto = result;
+            }
+            Console.WriteLine("cambio 2: {0}", this.texto);
         }
 
         private void convertirsets()
         {
-            string pattern = @"sets";
-            string replacement = "tokens";
-            Regex rgx = new Regex(pattern);
-            string result = rgx.Replace(texto, replacement);
-
-            Console.WriteLine("Original String: {0}", texto);
-            Console.WriteLine("Replacement String: {0}", result);
-            texto = result;
+            if (esets)
+            {
+                string pattern = @"sets";
+                string replacement = "tokens";
+                Regex rgx = new Regex(pattern);
+                string result = rgx.Replace(texto, replacement);
+                Console.WriteLine("Replacement String: {0}", result);
+                texto = result;
+            }
+            Console.WriteLine("cambio 3 String: {0}", this.texto);
         }
 
+        bool esets = false;
         private void conjuntos(string texto)
         {
             //-------------------------------------sets inicio-----------------------------------------------------------
             string pat = @"sets";
             int inicio = 0;
+            esets = false;
             // Instantiate the regular expression object.
             Regex r = new Regex(pat, RegexOptions.IgnoreCase);
 
@@ -261,6 +268,7 @@ namespace Fase_3_Compiladores__tablas_
             Match m = r.Match(texto);
             if (m.Success)
             {
+                esets = true;
                 inicio = m.Index;
             }
             //----------------------------------------toknes final --------------------------------------------------------
@@ -281,35 +289,39 @@ namespace Fase_3_Compiladores__tablas_
             string primerstr = texto.Substring(0, inicio);
             string segundostr = texto.Substring(inicio, final2); //string que me interesa contiene la palabra sets
             string finalstr = texto.Substring(final); //contiene la palabra tokens
+            string pattern, pattern2, replacement, replacement2, result = "";
+            Regex rgx, rgx2, rgx3;
+            //pre arreglo 
+            if (esets)
+            {
+                pattern2 = @"(\'\.)(?!\.)";
+                replacement2 = "\' .";
+                rgx2 = new Regex(pattern2);
+                result = rgx2.Replace(segundostr, replacement2);
+                Console.WriteLine(result);
 
-            //pre arreglo  
-            string pattern2 = @"(\'\.)(?!\.)";
-            string replacement2 = "\' .";
-            Regex rgx2 = new Regex(pattern2);
-            string result = rgx2.Replace(segundostr, replacement2);
-            Console.WriteLine(result);
+                pattern = @"(\)\.)(?!\.)";
+                replacement = ") .";
+                rgx = new Regex(pattern);
+                result = rgx.Replace(result, replacement);
+                Console.WriteLine(result);
 
-            string pattern = @"(\)\.)(?!\.)";
-            string replacement = ") .";
-            Regex rgx = new Regex(pattern);
-            result = rgx.Replace(result, replacement);
-            Console.WriteLine(result);
+                pattern = @"[^(""|\'|<|>)]=|=[^(""|\')]";
+                replacement = "(";
+                rgx3 = new Regex(pattern);
+                result = rgx3.Replace(result, replacement);
+                Console.WriteLine(result);
 
-            pattern = @"[^(""|\'|<|>)]=|=[^(""|\')]";
-            replacement = "(";
-            Regex rgx3 = new Regex(pattern);
-            result = rgx3.Replace(result, replacement);
-            Console.WriteLine(result);
-
-            pattern = @"([^\'|\.|\)])\."; //((\'|\))\.)(?!(\.))
-            replacement = ")";
-            rgx = new Regex(pattern);
-            result = rgx.Replace(result, replacement);
-            Console.WriteLine(result);
-
-            segundostr = result;
+                pattern = @"([^\'|\.|\)])\."; //((\'|\))\.)(?!(\.))
+                replacement = ")";
+                rgx = new Regex(pattern);
+                result = rgx.Replace(result, replacement);
+                Console.WriteLine(result);
+                segundostr = result;
+            }
             Console.WriteLine(segundostr);
             this.texto = primerstr + segundostr + finalstr;
+            Console.WriteLine(this.texto);
         }
 
         private void End()
@@ -332,8 +344,24 @@ namespace Fase_3_Compiladores__tablas_
             else
             {
                 mensaje = this.txtMensaje.Text = "Falta End. al final del archivo";
-                MessageBox.Show("Falta End. al final del archivo", "Error", MessageBoxButtons.OK , MessageBoxIcon.Error);
+                MessageBox.Show("Falta End. al final del archivo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+            }
+
+            string pat2 = @"(start\=)";
+            // Instantiate the regular expression object.
+            Regex r2 = new Regex(pat2, RegexOptions.IgnoreCase);
+            // Match the regular expression pattern against a text string.
+            Match m2 = r2.Match(texto);
+            if (m2.Success)
+            {
+                //pre arreglo  
+                string pattern2 = @"(start\=)";
+                string replacement2 = "start = ";
+                Regex rgx2 = new Regex(pattern2, RegexOptions.IgnoreCase);
+                string result = rgx2.Replace(this.texto, replacement2);
+                Console.WriteLine(result);
+                this.texto = result;
             }
         }
 
