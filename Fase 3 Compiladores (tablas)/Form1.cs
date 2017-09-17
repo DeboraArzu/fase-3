@@ -231,13 +231,9 @@ namespace Fase_3_Compiladores__tablas_
                 string replacement = "";
                 Regex rgx = new Regex(pattern);
                 string result = rgx.Replace(texto, replacement);
-
-                Console.WriteLine("Original String: {0}", texto);
-                Console.WriteLine("Replacement String: {0}", result);
                 this.texto = "";
                 this.texto = result;
             }
-            Console.WriteLine("cambio 2: {0}", this.texto);
         }
 
         private void convertirsets()
@@ -248,10 +244,8 @@ namespace Fase_3_Compiladores__tablas_
                 string replacement = "tokens";
                 Regex rgx = new Regex(pattern);
                 string result = rgx.Replace(texto, replacement);
-                Console.WriteLine("Replacement String: {0}", result);
                 texto = result;
             }
-            Console.WriteLine("cambio 3 String: {0}", this.texto);
         }
 
         bool esets = false;
@@ -298,30 +292,30 @@ namespace Fase_3_Compiladores__tablas_
                 replacement2 = "\' .";
                 rgx2 = new Regex(pattern2);
                 result = rgx2.Replace(segundostr, replacement2);
-                Console.WriteLine(result);
+                //Console.WriteLine(result);
 
                 pattern = @"(\)\.)(?!\.)";
                 replacement = ") .";
                 rgx = new Regex(pattern);
                 result = rgx.Replace(result, replacement);
-                Console.WriteLine(result);
+               // Console.WriteLine(result);
 
                 pattern = @"[^(""|\'|<|>)]=|=[^(""|\')]";
                 replacement = "(";
                 rgx3 = new Regex(pattern);
                 result = rgx3.Replace(result, replacement);
-                Console.WriteLine(result);
+               // Console.WriteLine(result);
 
                 pattern = @"([^\'|\.|\)])\."; //((\'|\))\.)(?!(\.))
                 replacement = ")";
                 rgx = new Regex(pattern);
                 result = rgx.Replace(result, replacement);
-                Console.WriteLine(result);
+               // Console.WriteLine(result);
                 segundostr = result;
             }
-            Console.WriteLine(segundostr);
+           // Console.WriteLine(segundostr);
             this.texto = primerstr + segundostr + finalstr;
-            Console.WriteLine(this.texto);
+           // Console.WriteLine(this.texto);
         }
 
         private void End()
@@ -338,7 +332,7 @@ namespace Fase_3_Compiladores__tablas_
                 string replacement2 = "";
                 Regex rgx2 = new Regex(pattern2, RegexOptions.IgnoreCase);
                 string result = rgx2.Replace(this.texto, replacement2);
-                Console.WriteLine(result);
+               // Console.WriteLine(result);
                 this.texto = result;
             }
             else
@@ -360,7 +354,7 @@ namespace Fase_3_Compiladores__tablas_
                 string replacement2 = "start = ";
                 Regex rgx2 = new Regex(pattern2, RegexOptions.IgnoreCase);
                 string result = rgx2.Replace(this.texto, replacement2);
-                Console.WriteLine(result);
+               // Console.WriteLine(result);
                 this.texto = result;
             }
         }
